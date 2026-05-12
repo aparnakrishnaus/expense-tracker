@@ -1,0 +1,23 @@
+# React
+frontend/node_modules
+frontend/dist
+frontend/build
+
+# Django
+expense-tracker-backend/venv/
+expense-tracker-backend/__pycache__/
+expense-tracker-backend/db.sqlite3
+
+# Python
+*.pyc
+
+# Environment files
+.env
+*.env
+
+# VS Code
+.vscode/
+
+# OS files
+desktop.ini
+.DS_Store
