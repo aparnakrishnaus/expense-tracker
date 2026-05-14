@@ -1,23 +1,43 @@
-# React
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node / React
+node_modules
 frontend/node_modules
+dist
 frontend/dist
 frontend/build
+dist-ssr
 
-# Django
-expense-tracker-backend/venv/
-expense-tracker-backend/__pycache__/
-expense-tracker-backend/db.sqlite3
-
-# Python
-*.pyc
-
-# Environment files
+# Local env files
 .env
 *.env
+*.local
 
-# VS Code
+# Python / Django
+*.pyc
+__pycache__/
+expense-tracker-backend/venv/
+expense-tracker-backend/db.sqlite3
+
+# VS Code / IDE
 .vscode/
+.idea/
 
 # OS files
-desktop.ini
 .DS_Store
+desktop.ini
+Thumbs.db
+
+# Visual Studio
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
