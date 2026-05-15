@@ -16,7 +16,13 @@ function ExpenseList({ expenses = [] }) {
   }
 
   return (
-    <div className="space-y-4">
+    <div  className="
+        grid
+        grid-cols-2
+        md:grid-cols-3
+        xl:grid-cols-4
+        gap-4
+      ">
       
       {expenses.map((expense) => (
         <ExpenseCard key={expense.id} expense={expense} />

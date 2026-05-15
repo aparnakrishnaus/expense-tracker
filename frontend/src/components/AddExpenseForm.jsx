@@ -38,8 +38,16 @@ function AddExpenseForm({ onAdd, onClose }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white p-6 rounded-xl shadow space-y-6"
+      className="
+    bg-[#111827]
+    border border-gray-700
+    rounded-3xl
+    shadow-2xl
+    p-6
+    space-y-6
+  "
     >
+
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-bold">Add Expense</h2>
 
@@ -65,7 +73,17 @@ function AddExpenseForm({ onAdd, onClose }) {
             placeholder="0.00"
             value={form.amount}
             onChange={handleChange}
-            className="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="
+    w-full
+    bg-[#1f2937]
+    border border-gray-600
+    text-gray-200
+    rounded-2xl
+    px-4
+    py-3
+    outline-none
+    focus:border-emerald-400
+  "
           />
         </div>
 
@@ -76,7 +94,17 @@ function AddExpenseForm({ onAdd, onClose }) {
             name="category"
             value={form.category}
             onChange={handleChange}
-            className="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="
+    w-full
+    bg-[#1f2937]
+    border border-gray-600
+    text-gray-200
+    rounded-2xl
+    px-4
+    py-3
+    outline-none
+    focus:border-emerald-400
+  "
           >
             <option value="">Select category</option>
             <option value="Groceries">Groceries</option>
@@ -95,7 +123,17 @@ function AddExpenseForm({ onAdd, onClose }) {
           type="date"
           value={form.date}
           onChange={handleChange}
-          className="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="
+    w-full
+    bg-[#1f2937]
+    border border-gray-600
+    text-gray-200
+    rounded-2xl
+    px-4
+    py-3
+    outline-none
+    focus:border-emerald-400
+  "
         />
       </div>
 
@@ -107,7 +145,17 @@ function AddExpenseForm({ onAdd, onClose }) {
           placeholder="What was this for?"
           value={form.description}
           onChange={handleChange}
-          className="w-full mt-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="
+    w-full
+    bg-[#1f2937]
+    border border-gray-600
+    text-gray-200
+    rounded-2xl
+    px-4
+    py-3
+    outline-none
+    focus:border-emerald-400
+  "
         />
       </div>
 

@@ -1,37 +1,74 @@
+import { motion } from "framer-motion";
+
 function ExpenseCard({ expense }) {
   const amount = Number(expense?.amount) || 0;
 
+  const getMoodEmoji = () => {
+    if (amount < 200) return "🙂";
+    if (amount < 1000) return "😅";
+    if (amount < 5000) return "😭";
+    return "💸";
+  };
+
   return (
-    <div className="group flex items-center justify-between p-5 rounded-2xl bg-white shadow-sm hover:shadow-md transition-all duration-300">
-      
-      {/* LEFT */}
-      <div className="flex items-center gap-4">
+    <motion.div
+      whileHover={{
+        y: -5,
+        scale: 1.02,
+      }}
+      transition={{ duration: 0.2 }}
+      className="
+        bg-[#111827]
+        border
+        border-white/10
+        rounded-3xl
+        p-4
+        shadow-xl
+        hover:border-emerald-400/20
+        transition-all
+      "
+    >
+      {/* Top */}
+      <div className="flex items-center justify-between">
         
-        {/* Icon */}
-        <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center text-gray-600 group-hover:bg-white transition">
-          💸
-        </div>
+        <span className="text-3xl">
+          {getMoodEmoji()}
+        </span>
 
-        {/* Info */}
-        <div>
-          <h4 className="text-md font-semibold text-gray-800">
-            {expense.category || "No Category"}
-          </h4>
-          <p className="text-xs text-gray-500">
-            {expense.date || "No Date"}
-          </p>
-        </div>
-
+        <span
+          className="
+            text-[10px]
+            px-2
+            py-1
+            rounded-full
+            bg-white/5
+            text-gray-400
+          "
+        >
+          {expense.category || "General"}
+        </span>
       </div>
 
-      {/* RIGHT */}
-      <div className="text-right">
-        <p className="text-lg font-bold text-red-500">
-          -₹{amount.toFixed(2)}
+      {/* Description */}
+      <div className="mt-4">
+        
+        <h3 className="text-white font-semibold text-sm leading-snug line-clamp-2">
+          {expense.description || "Expense"}
+        </h3>
+
+        <p className="text-gray-500 text-xs mt-2">
+          {expense.date || "No Date"}
         </p>
       </div>
 
-    </div>
+      {/* Amount */}
+      <div className="mt-5 pt-3 border-t border-white/5">
+        
+        <p className="text-red-400 text-xl font-black">
+          -₹{amount.toFixed(0)}
+        </p>
+      </div>
+    </motion.div>
   );
 }
 
