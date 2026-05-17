@@ -7,6 +7,8 @@ import {
 import Layout from "./components/Layout";
 import Dashboard from "./pages/Dashboard";
 import AnalyticsPage from "./pages/AnalyticsPage";
+import WalletPage from "./pages/WalletPage";
+import SettingsPage from "./pages/SettingsPage";
 
 import "@fontsource/space-grotesk/300.css";
 import "@fontsource/space-grotesk/400.css";
@@ -28,6 +30,14 @@ function App() {
           <Route
             path="analytics"
             element={<AnalyticsPage />}
+          />
+          <Route
+            path="wallets"
+            element={<WalletPage />}
+          />
+          <Route
+            path="settings"
+            element={<SettingsPage />}
           />
 
         </Route>

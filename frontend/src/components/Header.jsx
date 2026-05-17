@@ -4,12 +4,33 @@ import {
   Search,
   Menu,
 } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 function Header() {
+  const location = useLocation();
+
+  const getPageTitle = () => {
+    switch (location.pathname) {
+      case "/":
+        return "Dashboard";
+
+      case "/analytics":
+        return "Analytics";
+
+      case "/wallets":
+        return "Wallets";
+
+      case "/settings":
+        return "Settings";
+
+      default:
+        return "Fiscal Atelier";
+    }
+  };
   const [search, setSearch] = useState("");
 
   return (
-    <header className="sticky top-0 z-40 px-6 pt-6">
+    <header className="top-0 z-40 px-6 pt-6">
 
       <div
         className="
@@ -27,7 +48,7 @@ function Header() {
           {/* LEFT */}
           <div>
             <h1 className="text-2xl font-black text-white">
-              Dashboard
+              {getPageTitle()}
             </h1>
 
             <p className="text-sm text-gray-400 mt-1">
