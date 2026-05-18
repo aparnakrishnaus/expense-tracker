@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Wallet,
@@ -12,23 +13,52 @@ function WalletPage() {
   const income = 42000;
   const expenses = 13550;
 
-  const cards = [
-    {
-      id: 1,
-      type: "Primary Card",
-      number: "**** 4582",
-      holder: "Aparna Krishna",
-      expiry: "12/28",
-    },
-    {
-      id: 2,
-      type: "Savings Card",
-      number: "**** 9031",
-      holder: "Aparna Krishna",
-      expiry: "04/29",
-    },
-  ];
+  const [cards, setCards] = useState([]);
+  const [formData, setFormData] = useState({
+    type: "",
+    number: "",
+    holder: "",
+    expiry: "",
+  });
+  const [showCardForm, setShowCardForm] = useState(false);
 
+  const handleAddCard = (e) => {
+    e.preventDefault();
+
+    if (
+      !formData.type ||
+      !formData.number ||
+      !formData.holder ||
+      !formData.expiry
+    ) {
+      return;
+    }
+
+    const maskedNumber =
+      "**** **** **** " + formData.number.slice(-4);
+
+    const newCard = {
+      id: Date.now(),
+      type: formData.type,
+      number: maskedNumber,
+      holder: formData.holder,
+      expiry: formData.expiry,
+    };
+
+    setCards([...cards, newCard]);
+
+    setFormData({
+      type: "",
+      number: "",
+      holder: "",
+      expiry: "",
+    });
+
+    setShowCardForm(false);
+  };
+  const handleDeleteCard = (id) => {
+  setCards(cards.filter((card) => card.id !== id));
+};
   const transactions = [
     {
       id: 1,
@@ -52,7 +82,6 @@ function WalletPage() {
       type: "expense",
     },
   ];
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -125,11 +154,114 @@ function WalletPage() {
 
       {/* Wallet Cards */}
       <div>
-        <h2 className="text-2xl font-bold text-white mb-5">
-          Linked Cards
-        </h2>
+        <div className="flex items-center justify-between mb-5">
+          <h2 className="text-2xl font-bold text-white">
+            Linked Cards
+          </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <button
+            onClick={() => setShowCardForm(true)}
+            className="rounded-xl bg-emerald-500 px-5 py-2 text-white font-medium hover:bg-emerald-600 transition"
+          >
+            Add Card
+          </button>
+        </div>
+
+        {showCardForm && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+
+            <div className="w-full max-w-md rounded-3xl border border-white/10 bg-[#111827] p-6">
+
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-white">
+                  Add New Card
+                </h2>
+
+                <button
+                  onClick={() => setShowCardForm(false)}
+                  className="text-gray-400 hover:text-white"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <form
+                onSubmit={handleAddCard}
+                className="space-y-4"
+              >
+
+                <input
+                  type="text"
+                  placeholder="Card Type"
+                  value={formData.type}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      type: e.target.value,
+                    })
+                  }
+                  className="w-full rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none"
+                />
+
+                <input
+                  type="text"
+                  placeholder="Card Number"
+                  value={formData.number}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      number: e.target.value,
+                    })
+                  }
+                  className="w-full rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none"
+                />
+
+                <input
+                  type="text"
+                  placeholder="Card Holder"
+                  value={formData.holder}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      holder: e.target.value,
+                    })
+                  }
+                  className="w-full rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none"
+                />
+
+                <input
+                  type="text"
+                  placeholder="MM/YY"
+                  value={formData.expiry}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      expiry: e.target.value,
+                    })
+                  }
+                  className="w-full rounded-xl border border-white/10 bg-white/5 p-3 text-white outline-none"
+                />
+
+                <button
+                  type="submit"
+                  className="w-full rounded-xl bg-emerald-500 py-3 font-semibold text-white hover:bg-emerald-600 transition"
+                >
+                  Save Card
+                </button>
+
+              </form>
+            </div>
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+          {cards.length === 0 && (
+            <div className="col-span-full rounded-3xl border border-dashed border-white/10 p-10 text-center">
+              <p className="text-gray-400">
+                No cards added yet.
+              </p>
+            </div>
+          )}
           {cards.map((card, index) => (
             <motion.div
               key={card.id}
@@ -137,26 +269,35 @@ function WalletPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ scale: 1.02 }}
-              className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#111827] p-6 shadow-xl"
+             className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900 to-slate-800 p-5 shadow-xl"
             >
               <div className="absolute top-0 right-0 h-32 w-32 rounded-full bg-cyan-500/10 blur-3xl" />
 
               <div className="relative z-10">
-                <div className="flex items-center justify-between mb-10">
+                <div className="flex items-center justify-between mb-6">
                   <div>
                     <p className="text-gray-400 text-sm">
                       {card.type}
                     </p>
                   </div>
 
-                  <CreditCard className="text-white" />
+                  <div className="flex items-center gap-3">
+    <button
+      onClick={() => handleDeleteCard(card.id)}
+      className="text-xs text-red-400 hover:text-red-300 transition"
+    >
+      Remove
+    </button>
+
+    <CreditCard className="text-white" />
+  </div>
                 </div>
 
-                <h3 className="text-2xl tracking-widest font-semibold text-white mb-8">
+                <h3 className="text-xl  tracking-[3px] font-semibold text-white mb-6">
                   {card.number}
                 </h3>
 
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between text-sm">
                   <div>
                     <p className="text-xs text-gray-400 mb-1">
                       CARD HOLDER
@@ -214,11 +355,10 @@ function WalletPage() {
               </div>
 
               <p
-                className={`font-bold text-lg ${
-                  transaction.type === "income"
-                    ? "text-emerald-400"
-                    : "text-red-400"
-                }`}
+                className={`font-bold text-lg ${transaction.type === "income"
+                  ? "text-emerald-400"
+                  : "text-red-400"
+                  }`}
               >
                 {transaction.amount}
               </p>
