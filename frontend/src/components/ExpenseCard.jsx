@@ -21,8 +21,8 @@ function ExpenseCard({ expense }) {
         bg-[#111827]
         border
         border-white/10
-        rounded-3xl
-        p-4
+        rounded-2xl
+        p-3
         shadow-xl
         hover:border-emerald-400/20
         transition-all
@@ -31,7 +31,7 @@ function ExpenseCard({ expense }) {
       {/* Top */}
       <div className="flex items-center justify-between">
         
-        <span className="text-3xl">
+        <span className="text-2xl">
           {getMoodEmoji()}
         </span>
 
@@ -50,21 +50,21 @@ function ExpenseCard({ expense }) {
       </div>
 
       {/* Description */}
-      <div className="mt-4">
+      <div className="mt-3">
         
         <h3 className="text-white font-semibold text-sm leading-snug line-clamp-2">
           {expense.description || "Expense"}
         </h3>
 
-        <p className="text-gray-500 text-xs mt-2">
+        <p className="text-gray-500 text-xs mt-1">
           {expense.date || "No Date"}
         </p>
       </div>
 
       {/* Amount */}
-      <div className="mt-5 pt-3 border-t border-white/5">
+      <div className="mt-3 pt-2 border-t border-white/5">
         
-        <p className="text-red-400 text-xl font-black">
+        <p className="text-red-400 text-lg font-black">
           -₹{amount.toFixed(0)}
         </p>
       </div>

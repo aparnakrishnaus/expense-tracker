@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import { useLocation } from "react-router-dom";
 
-function Header() {
+function Header({ onMenuClick }) {
   const location = useLocation();
 
   const getPageTitle = () => {
@@ -30,28 +30,29 @@ function Header() {
   const [search, setSearch] = useState("");
 
   return (
-    <header className="top-0 z-40 px-6 pt-6">
+    <header className="top-0 z-40 px-1 sm:px-2 pt-2">
 
       <div
         className="
           bg-white/10
           backdrop-blur-2xl
           border border-white/10
-          rounded-3xl
+          rounded-2xl
           shadow-2xl
-          px-6
-          py-4
+          px-4
+          py-3
+          sm:px-5
         "
       >
-        <div className="flex items-center justify-between gap-6">
+        <div className="flex items-center justify-between gap-4">
 
           {/* LEFT */}
           <div>
-            <h1 className="text-2xl font-black text-white">
+            <h1 className="text-xl font-black text-white">
               {getPageTitle()}
             </h1>
 
-            <p className="text-sm text-gray-400 mt-1">
+            <p className="text-xs text-gray-400 mt-1">
               Track your financial activity
             </p>
           </div>
@@ -81,10 +82,10 @@ function Header() {
                 border border-white/10
                 text-white
                 placeholder:text-gray-500
-                rounded-2xl
+                rounded-xl
                 pl-11
                 pr-4
-                py-3
+                py-2.5
                 outline-none
                 focus:border-emerald-400
                 focus:ring-2
@@ -99,11 +100,12 @@ function Header() {
 
             {/* Notification */}
             <button
+              onClick={onMenuClick}
               className="
                 relative
-                w-12
-                h-12
-                rounded-2xl
+                w-10
+                h-10
+                rounded-xl
                 bg-white/5
                 border border-white/10
                 flex
@@ -115,13 +117,13 @@ function Header() {
                 transition-all
               "
             >
-              <Bell size={20} />
+              <Bell size={18} />
 
               <span
                 className="
                   absolute
-                  top-3
-                  right-3
+                  top-2.5
+                  right-2.5
                   w-2
                   h-2
                   rounded-full
@@ -133,9 +135,9 @@ function Header() {
             {/* Profile */}
             <div
               className="
-                w-12
-                h-12
-                rounded-2xl
+                w-10
+                h-10
+                rounded-xl
                 bg-gradient-to-br
                 from-emerald-400
                 to-cyan-500
@@ -152,11 +154,12 @@ function Header() {
 
             {/* Mobile */}
             <button
+              onClick={onMenuClick}
               className="
                 lg:hidden
-                w-12
-                h-12
-                rounded-2xl
+                w-10
+                h-10
+                rounded-xl
                 bg-white/5
                 border border-white/10
                 flex
@@ -165,7 +168,7 @@ function Header() {
                 text-gray-300
               "
             >
-              <Menu size={22} />
+              <Menu size={20} />
             </button>
 
           </div>

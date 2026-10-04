@@ -30,6 +30,11 @@ function Dashboard() {
     };
 
     const [activeTab, setActiveTab] = useState("dashboard");
+    const [showAllExpenses, setShowAllExpenses] = useState(false);
+
+    const visibleExpenses = showAllExpenses
+        ? expenses
+        : expenses.slice(0, 5);
 
     return (
         <motion.main
@@ -37,77 +42,77 @@ function Dashboard() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
         >
-            <div className="min-h-screen bg-[#0f172a] text-white overflow-hidden relative">
+            <div className="min-h-screen bg-[#0f172a] text-white overflow-x-hidden relative">
 
                 {/* Background Glow Effects */}
-                <div className="absolute top-0 left-0 w-96 h-96 bg-emerald-500/20 blur-3xl rounded-full"></div>
-                <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500/20 blur-3xl rounded-full"></div>
+                <div className="absolute top-0 left-0 w-56 h-56 bg-emerald-500/20 blur-3xl rounded-full"></div>
+                <div className="absolute bottom-0 right-0 w-56 h-56 bg-cyan-500/20 blur-3xl rounded-full"></div>
 
-                <main className="relative z-10 pt-28 px-5 max-w-7xl mx-auto">
+                <main className="relative z-10 pt-1 px-2 sm:px-4 max-w-7xl mx-auto">
 
                     {/* Hero Section */}
                     <motion.section initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
-                        className="mb-10">
-                        <div className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl">
+                        className="mb-5">
+                        <div className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl p-4 sm:p-5 shadow-2xl">
 
-                            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+                            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 
                                 {/* Left */}
                                 <div>
-                                    <div className="flex items-center gap-2 mb-3">
-                                        <Sparkles className="text-emerald-400" size={20} />
-                                        <p className="uppercase tracking-[4px] text-sm text-gray-300">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <Sparkles className="text-emerald-400" size={16} />
+                                        <p className="uppercase tracking-[2px] text-xs text-gray-300">
                                             Smart Finance Tracker
                                         </p>
                                     </div>
 
-                                    <h1 className="text-4xl md:text-5xl font-black leading-tight">
+                                    <h1 className="text-2xl sm:text-3xl font-black leading-tight">
                                         Track Your
                                         <span className="text-emerald-400"> Expenses </span>
-                                        Beautifully
+                                        
                                     </h1>
 
-                                    <p className="mt-4 text-gray-300 max-w-xl leading-relaxed">
+                                    <p className="mt-2 text-sm text-gray-300 max-w-xl leading-relaxed">
                                         A modern personal finance dashboard with elegant visuals,
                                         smooth interaction, and aesthetic analytics.
                                     </p>
 
                                     <button
                                         onClick={() => setShowForm(true)}
-                                        className="mt-6 flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 transition-all px-6 py-3 rounded-2xl font-semibold shadow-lg shadow-emerald-500/30"
+                                        className="mt-3 flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 transition-all px-4 py-2 rounded-xl font-semibold shadow-lg shadow-emerald-500/30 text-sm"
                                     >
-                                        <Plus size={18} />
+                                        <Plus size={16} />
                                         Add Expense
                                     </button>
                                 </div>
 
                                 {/* Right Floating Cards */}
-                                <div className="grid grid-cols-2 gap-4 w-full md:w-[320px]">
+                                <div className="grid grid-cols-2 gap-3 w-full sm:w-[240px] md:w-[280px]">
 
-                                    <div className="bg-white/10 border border-white/10 rounded-2xl p-5 backdrop-blur-lg">
-                                        <Wallet className="text-emerald-400 mb-3" />
-                                        <p className="text-gray-400 text-sm">Wallet Balance</p>
-                                        <h2 className="text-2xl font-bold mt-1">₹24,500</h2>
+                                    <div className="bg-white/10 border border-white/10 rounded-xl p-3 sm:p-4 backdrop-blur-lg">
+                                        <Wallet className="text-emerald-400 mb-2" />
+                                        <p className="text-gray-400 text-xs">Wallet Balance</p>
+                                        <h2 className="text-xl font-bold mt-1">₹24,500</h2>
                                     </div>
 
-                                    <div className="bg-white/10 border border-white/10 rounded-2xl p-5 backdrop-blur-lg">
-                                        <TrendingUp className="text-cyan-400 mb-3" />
-                                        <p className="text-gray-400 text-sm">Monthly Saving</p>
-                                        <h2 className="text-2xl font-bold mt-1">+18%</h2>
+                                    <div className="bg-white/10 border border-white/10 rounded-xl p-3 sm:p-4 backdrop-blur-lg">
+                                        <TrendingUp className="text-cyan-400 mb-2" />
+                                        <p className="text-gray-400 text-xs">Monthly Saving</p>
+                                        <h2 className="text-xl font-bold mt-1">+18%</h2>
                                     </div>
 
-                                    <div className="col-span-2 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-2xl p-5 text-black shadow-xl">
-                                        <p className="font-semibold">
+                                    <div className="col-span-2 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-xl p-4 text-black shadow-xl">
+                                        <p className="font-semibold text-sm">
                                             Financial Insight
                                         </p>
 
-                                        <h3 className="text-3xl font-black mt-2">
+                                        <h3 className="text-xl sm:text-2xl font-black mt-1">
                                             Keep growing 📈
                                         </h3>
 
-                                        <p className="mt-2 text-sm">
+                                        <p className="mt-1 text-xs">
                                             Your spending is healthier than last month.
                                         </p>
                                     </div>
@@ -121,7 +126,7 @@ function Dashboard() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.5 }}
-                        className="mb-8"
+                        className="mb-5"
                     >
                         <SummaryCard expenses={expenses} />
                     </motion.section>
@@ -148,26 +153,47 @@ function Dashboard() {
                     <motion.section initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4, duration: 0.5 }}
-                        className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-2xl">
+                        className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-2xl">
 
-                        <div className="flex items-center justify-between mb-6">
+                        <div className="flex items-center justify-between mb-4">
                             <div>
-                                <p className="text-gray-400 text-sm uppercase tracking-[3px]">
+                                <p className="text-gray-400 text-xs uppercase tracking-[2px]">
                                     Recent Activity
                                 </p>
 
-                                <h2 className="text-2xl font-bold mt-1">
+                                <h2 className="text-xl font-bold mt-1">
                                     Transactions
                                 </h2>
                             </div>
 
-                            <div className="bg-emerald-500/20 text-emerald-300 px-4 py-2 rounded-xl text-sm">
+                            <div className="bg-emerald-500/20 text-emerald-300 px-3 py-1.5 rounded-xl text-xs">
                                 {expenses.length} Records
                             </div>
                         </div>
 
-                        <div className="max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
-                            <ExpenseList expenses={expenses} />
+                        <div>
+                            <div className="max-h-[360px] sm:max-h-[420px] overflow-hidden">
+                                <ExpenseList expenses={visibleExpenses} />
+                            </div>
+
+                            {expenses.length > 5 && (
+                                <button
+                                    onClick={() => setShowAllExpenses(!showAllExpenses)}
+                                    className="mt-4 mx-auto flex items-center gap-2 text-sm font-medium text-emerald-600 hover:text-emerald-700 transition"
+                                >
+                                    {showAllExpenses ? (
+                                        <>
+                                            Show less
+                                            <span className="text-lg">↑</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            Show more
+                                            <span className="text-lg">↓</span>
+                                        </>
+                                    )}
+                                </button>
+                            )}
                         </div>
                     </motion.section>
                 </main>
@@ -187,11 +213,13 @@ function Dashboard() {
                     }}
                     className="
     fixed
-    bottom-8
-    right-8
+    bottom-5
+    right-5
+    sm:bottom-6
+    sm:right-6
     z-50
-    w-16
-    h-16
+    w-12
+    h-12
     rounded-full
     bg-gradient-to-r
     from-emerald-500
@@ -204,7 +232,7 @@ function Dashboard() {
     backdrop-blur-xl
   "
                 >
-                    <Plus size={30} strokeWidth={2.5} />
+                    <Plus size={22} strokeWidth={2.5} />
                 </motion.button>
             </div>
         </motion.main>

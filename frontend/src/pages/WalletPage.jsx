@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { motion } from "framer-motion";
 import {
   Wallet,
@@ -9,9 +10,6 @@ import {
 } from "lucide-react";
 
 function WalletPage() {
-  const balance = 28450;
-  const income = 42000;
-  const expenses = 13550;
 
   const [cards, setCards] = useState([]);
   const [formData, setFormData] = useState({
@@ -59,29 +57,47 @@ function WalletPage() {
   const handleDeleteCard = (id) => {
   setCards(cards.filter((card) => card.id !== id));
 };
-  const transactions = [
-    {
-      id: 1,
-      title: "Netflix Subscription",
-      amount: "- ₹499",
-      date: "Today",
-      type: "expense",
-    },
-    {
-      id: 2,
-      title: "Salary Credit",
-      amount: "+ ₹42,000",
-      date: "Yesterday",
-      type: "income",
-    },
-    {
-      id: 3,
-      title: "Amazon Purchase",
-      amount: "- ₹1,299",
-      date: "2 days ago",
-      type: "expense",
-    },
-  ];
+
+
+  const [expensesData, setExpensesData] = useState([]);
+const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  const fetchExpenses = async () => {
+    try {
+      const response = await axios.get(
+        "http://127.0.0.1:8000/api/expenses/"
+      );
+
+      setExpensesData(response.data);
+    } catch (error) {
+      console.error("Failed to fetch expenses:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchExpenses();
+}, []);
+
+const totalExpenses = expensesData.reduce((sum, item) => {
+  const amount = Number(item?.amount);
+
+  return sum + (Number.isNaN(amount) ? 0 : amount);
+}, 0);
+
+const income = 0;
+
+const balance = income - totalExpenses;
+
+const transactions = expensesData.map((expense) => ({
+  id: expense.id,
+  title: expense.title || expense.description || "Expense",
+  amount: Number(expense.amount || 0),
+  date: expense.date || expense.created_at || "",
+  type: "expense",
+}));
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -113,12 +129,12 @@ function WalletPage() {
             <div className="flex items-center gap-3 text-emerald-300 mb-4">
               <Wallet size={24} />
               <p className="uppercase tracking-widest text-sm font-medium">
-                Available Balance
+                Total Expenses
               </p>
             </div>
 
             <h1 className="text-5xl font-black text-white">
-              ₹{balance.toLocaleString()}
+            ₹{totalExpenses.toLocaleString()}
             </h1>
 
             <p className="text-gray-300 mt-3">
@@ -145,7 +161,7 @@ function WalletPage() {
               </div>
 
               <h3 className="text-2xl font-bold text-white">
-                ₹{expenses.toLocaleString()}
+                ₹{totalExpenses.toLocaleString()}
               </h3>
             </div>
           </div>
@@ -360,7 +376,7 @@ function WalletPage() {
                   : "text-red-400"
                   }`}
               >
-                {transaction.amount}
+                - ₹{Number(transaction.amount).toLocaleString()}
               </p>
             </motion.div>
           ))}

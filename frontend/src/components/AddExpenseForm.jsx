@@ -41,15 +41,16 @@ function AddExpenseForm({ onAdd, onClose }) {
       className="
     bg-[#111827]
     border border-gray-700
-    rounded-3xl
+    rounded-2xl
     shadow-2xl
-    p-6
-    space-y-6
+    p-4
+    sm:p-5
+    space-y-4
   "
     >
 
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-bold">Add Expense</h2>
+      <div className="flex justify-between items-center mb-3">
+        <h2 className="text-base font-bold">Add Expense</h2>
 
         <button
           type="button"
@@ -66,7 +67,7 @@ function AddExpenseForm({ onAdd, onClose }) {
 
         {/* Amount */}
         <div>
-          <label className="text-sm text-gray-500">Amount</label>
+          <label className="text-xs text-gray-500">Amount</label>
           <input
             name="amount"
             type="number"
@@ -78,9 +79,9 @@ function AddExpenseForm({ onAdd, onClose }) {
     bg-[#1f2937]
     border border-gray-600
     text-gray-200
-    rounded-2xl
-    px-4
-    py-3
+rounded-xl
+     px-3
+     py-2.5
     outline-none
     focus:border-emerald-400
   "
@@ -89,7 +90,7 @@ function AddExpenseForm({ onAdd, onClose }) {
 
         {/* Category */}
         <div>
-          <label className="text-sm text-gray-500">Category</label>
+          <label className="text-xs text-gray-500">Category</label>
           <select
             name="category"
             value={form.category}
@@ -99,9 +100,9 @@ function AddExpenseForm({ onAdd, onClose }) {
     bg-[#1f2937]
     border border-gray-600
     text-gray-200
-    rounded-2xl
-    px-4
-    py-3
+    rounded-xl
+    px-3
+    py-2.5
     outline-none
     focus:border-emerald-400
   "
@@ -117,7 +118,7 @@ function AddExpenseForm({ onAdd, onClose }) {
 
       {/* Date */}
       <div>
-        <label className="text-sm text-gray-500">Date</label>
+        <label className="text-xs text-gray-500">Date</label>
         <input
           name="date"
           type="date"
@@ -128,9 +129,9 @@ function AddExpenseForm({ onAdd, onClose }) {
     bg-[#1f2937]
     border border-gray-600
     text-gray-200
-    rounded-2xl
-    px-4
-    py-3
+rounded-xl
+     px-3
+     py-2.5
     outline-none
     focus:border-emerald-400
   "
@@ -139,7 +140,7 @@ function AddExpenseForm({ onAdd, onClose }) {
 
       {/* Description */}
       <div>
-        <label className="text-sm text-gray-500">Description</label>
+        <label className="text-xs text-gray-500">Description</label>
         <input
           name="description"
           placeholder="What was this for?"
@@ -150,9 +151,9 @@ function AddExpenseForm({ onAdd, onClose }) {
     bg-[#1f2937]
     border border-gray-600
     text-gray-200
-    rounded-2xl
-    px-4
-    py-3
+rounded-xl
+     px-3
+     py-2.5
     outline-none
     focus:border-emerald-400
   "
@@ -162,7 +163,7 @@ function AddExpenseForm({ onAdd, onClose }) {
       {/* Submit */}
       <button
         type="submit"
-        className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition"
+        className="w-full bg-green-600 text-white py-2.5 rounded-xl font-semibold hover:bg-green-700 transition"
       >
         Add Expense
       </button>
